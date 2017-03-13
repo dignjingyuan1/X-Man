@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="keywords" content="JS数字滚动,数字滚动效果,数字滚动特效"/>
+    <meta name="description" content="JS数字滚动"/>
+
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+
+    <style type="text/css">
+        .numrun {
+            width: 300px;
+            margin: 100px auto;
+        }
+
+        .numrun span {
+            width: 300px;
+            height: 40px;
+            display: block;
+            overflow: hidden;
+        }
+
+        .numrun span i {
+            font-size: 40px;
+            line-height: 40px;
+            font-family: Arial;
+            font-style: normal;
+            float: left;
+            display: block;
+            position: relative;
+            word-break: break-all;
+            word-wrap: break-word;
+            width: 24px;
+        }
+
+        .bottom {
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+<header class="demo_header">
+    <h1>JS���ֹ���</h1>
+</header>
+<div class="top_fill"></div>
+<main class="demo">
+    <div class="numrun">
+        <span>
+            <i>0</i>
+            <i>0</i>
+            <i>0</i>
+            <i>0</i>
+            <i>0</i>
+            <i>0</i>
+            <i>0</i>
+            <i>0</i>
+            <i>0</i>
+            <i>0</i>
+        </span>
+    </div>
+</main>
+<footer class="demo_footer">
+    <a href="/">ACGIST</a>
+</footer>
+<script type="text/javascript">
+    function numRun() {
+        var numStrs = "8192731";
+        var objs = $(".numrun span i");
+        for (var indexx = 0; indexx < objs.length; indexx++) {
+            numIRun($(objs).eq(indexx), 0, parseInt(numStrs.charAt(indexx)));
+        }
+    }
+    function numIRun(obj, index, max) {
+        var text = index == max ? index : index + "" + (index + 1);
+        obj.text(text).css("top", "0px");
+        if (index < max) {
+            var proc = 0;
+            var end = 500;
+            var total = 1500;
+            if (max > 1)
+                proc = (total - end) / (max - 1);
+            if (index == (max - 1))
+                proc = end;
+            obj.animate({"top": "-40"}, (max == 1) ? total : proc, function () {
+                index++;
+                numIRun(obj, index, max);
+            });
+        }
+    }
+    numRun();
+</script>
+</body>
+</html>

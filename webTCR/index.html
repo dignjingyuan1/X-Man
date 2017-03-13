@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TCR</title>
+    <script src="gest.js"></script>
+</head>
+<body>
+<div id="people" style="width: 200px; height: 200px; background-color: red; position: fixed; top: 0; left: 0">跑起来</div>
+<script type="text/javascript">
+    var people = document.getElementById('people');
+    gest.options.subscribeWithCallback(function (gesture) {
+        var message = '';
+        if (gesture.direction) {
+            message = gesture.direction;
+            console.log(message);
+            if (gesture.left) {
+                console.log('左');
+                var ints = parseInt(people.style.left);
+                people.style.left = (ints -= 100) + 'px';
+            }
+            if (gesture.right) {
+                console.log('右');
+                var ints = parseInt(people.style.left);
+                people.style.left = (ints += 100) + 'px';
+            }
+            if (gesture.up) {
+                console.log('上');
+                var ints = parseInt(people.style.top);
+                people.style.top = (ints -= 100) + 'px';
+            }
+            if (gesture.down) {
+                console.log('下');
+                var ints = parseInt(people.style.top);
+                people.style.top = (ints += 100) + 'px';
+            }
+        } else {
+            alert('erro')
+        }
+    });
+    gest.start();
+</script>
+</body>
+</html>
